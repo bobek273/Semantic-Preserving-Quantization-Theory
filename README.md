@@ -182,11 +182,11 @@ We're actively seeking collaborators! Especially valuable:
 If you use this work, please cite:
 
 ```bibtex
-@article{semantic_quantization_2024,
+@article{semantic_quantization_2025,
   title={Semantic-Preserving Quantization: A Geometric Information Theory of Neural Network Compression},
-  author={Your Name},
+  author={bobek273},
   journal={arXiv preprint arXiv:XXXX.XXXXX},
-  year={2024}
+  year={2025}
 }
 ```
 
