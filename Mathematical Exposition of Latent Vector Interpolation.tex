@@ -1,0 +1,87 @@
+% Setting up the document class for a standard article
+\documentclass[a4paper,12pt]{article}
+
+% Including essential packages for mathematical typesetting and formatting
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{enumitem}
+\usepackage{setspace}
+\onehalfspacing
+
+% Configuring font package last, using Latin Modern
+\usepackage{lmodern}
+
+% Starting the document
+\begin{document}
+
+% Creating the title and author
+\title{Mathematical Exposition of Latent Vector Interpolation via Nearest Neighbor Arithmetic}
+\author{}
+\date{}
+\maketitle
+
+% Writing the main content
+\section{Background and Setup}
+Let $Z \subset \mathbb{R}^n$ denote the latent space of a pretrained generative model $G: Z \to X$, where $X$ is the data space (e.g., images). Assume $G$ is fixed.
+
+Let $\{z_i\}_{i=1}^N \subset Z$ be a finite set of latent vectors. These may correspond to real images or synthetic data.
+
+We are given a target latent vector $z \in Z$. Our goal is to interpolate or reconstruct $z$ as a linear combination of the vectors $\{z_i\}$ such that:
+\[
+\hat{z} = \sum_{i \in I} \alpha_i z_i, \quad \text{where} \quad \sum_{i \in I} \alpha_i = 1, \quad \alpha_i \in \mathbb{R}
+\]
+with $I \subset \{1, \dots, N\}$ indexing the $k$ nearest neighbors to $z$.
+
+\section{Nearest Neighbor Selection}
+Define a distance metric $d: Z \times Z \to \mathbb{R}_{\geq 0}$. In this case, we use the Euclidean distance:
+\[
+d(z, z_i) = \|z - z_i\|_2
+\]
+Let $I_k(z) \subset \{1, \dots, N\}$ denote the indices of the $k$ closest latent vectors to $z$:
+\[
+I_k(z) = \arg\min_{\substack{I \subset \{1, \dots, N\} \\ |I| = k}} \sum_{i \in I} \|z - z_i\|_2
+\]
+
+\section{Linear Reconstruction via Least Squares}
+We now aim to find weights $\alpha_i \in \mathbb{R}$, $i \in I_k(z)$, such that:
+\[
+\hat{z} = \sum_{i \in I_k(z)} \alpha_i z_i \approx z
+\]
+with the normalization constraint:
+\[
+\sum_{i \in I_k(z)} \alpha_i = 1
+\]
+Define matrix $Z_k \in \mathbb{R}^{n \times k}$ with columns $z_i$, $i \in I_k(z)$, and let $\alpha \in \mathbb{R}^k$ be the vector of weights. The objective becomes:
+\[
+\min_{\alpha \in \mathbb{R}^k} \|Z_k \alpha - z\|_2^2 \quad \text{subject to} \quad \mathbf{1}^\top \alpha = 1
+\]
+
+\section{Solution via Lagrange Multipliers}
+Form the Lagrangian:
+\[
+L(\alpha, \lambda) = \|Z_k \alpha - z\|_2^2 + \lambda (\mathbf{1}^\top \alpha - 1)
+\]
+Set derivatives to zero:
+\[
+\nabla_\alpha L = 2 Z_k^\top (Z_k \alpha - z) + \lambda \mathbf{1} = 0
+\]
+\[
+\frac{\partial L}{\partial \lambda} = \mathbf{1}^\top \alpha - 1 = 0
+\]
+
+\section{Reconstruction and Interpolation}
+The solution $\hat{z} = Z_k \alpha^*$ is a convex combination (if $\alpha_i \geq 0$) or affine combination (if some $\alpha_i < 0$) of the nearest neighbor latent vectors.
+
+This enables a locally linear approximation of $z$, akin to locally linear embedding (LLE).
+
+\section{Summary}
+\begin{itemize}
+    \item Nearest neighbors are selected based on Euclidean proximity in latent space.
+    \item A linear model with weights summing to 1 approximates the target latent.
+    \item The reconstruction can be viewed as a low-dimensional linear manifold locally approximating the latent space around $z$.
+    \item The final reconstructed $\hat{z}$ can be fed to the generator $G$ to produce an image approximating $G(z)$.
+\end{itemize}
+
+% Ending the document
+\end{document}
