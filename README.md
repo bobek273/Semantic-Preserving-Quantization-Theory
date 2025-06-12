@@ -14,7 +14,7 @@ We can compress neural networks **10-50x smaller** while maintaining their seman
 - **Semantic quality metrics** - measure what you're losing before you lose it  
 - **Geometric preservation algorithms** - compress while maintaining meaning structure
 
-**[🎮 Try the Interactive Demo]([https://your-demo-link.com](https://lsqtheory.vercel.app))**
+**[🎮 Try the Interactive Demo]([https://lsqtheory.vercel.app])**
 
 ## 📖 **The Problem**
 
