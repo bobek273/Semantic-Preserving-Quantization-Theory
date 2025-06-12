@@ -112,7 +112,7 @@ semantic-quantization/
 
 ## 🎯 **Interactive Demo**
 
-**[🎮 Live Demo](https://your-demo-link.com](https://lsqdemo.vercel.app)** - Explore how quantization affects latent space geometry in real-time.
+🎮 Live Demo https://lsqdemo.vercel.app - Explore how quantization affects latent space geometry in real-time.
 
 Features:
 - **Real-time visualization** of embedding quantization
@@ -175,7 +175,6 @@ We're actively seeking collaborators! Especially valuable:
 - [ ] Benchmark against existing compression methods
 - [ ] Real-world deployment case studies
 
-**[📧 Contact for collaboration](mailto:your-email@example.com)**
 
 ## 📜 **Citation**
 
